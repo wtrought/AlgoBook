@@ -7,3 +7,7 @@ Version 0.0.1 Changelog
 Version 0.0.2 Changelog
 - Chapter 1: Graph introduction, DFS (WIP)
 - Preface (WIP)
+
+Version 0.1.0 Changelog
+- LaTeX formatting: ToC, Theorem, Proof, Pseudocode(Verbatim), Macros
+- Added references, appendix I & II
