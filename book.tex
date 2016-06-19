@@ -97,7 +97,7 @@
     proof of correctness is important, but those can be found in other textbooks. Our primary focus
     is to implement and design algorithms for particular problems. You can think of this
     text as a ``cookbook'' for algorithms.\\
-    \indent We have included two appendixes. Appendix 1 is devoted to common data structures we
+    \indent We have included an two appendixes. Appendix 1 is devoted to common data structures we
     encountered using Java and C++. Appendix 2 includes common mathematical formulas for reference.
     \restoregeometry  %Restore to original margins
 
@@ -158,6 +158,9 @@
       The relation $f(n) = \omega(g(n))$ implies that $$\lim_{n\to\infty} \dfrac{f(n)}{g(n)} = \infty$$
       if the limit exists.
 
+    \section*{Comparing functions}
+      Many relational properties of real numbers also apply to asymptotic comparisons.
+      \subsection*{Transitivity}
   \chapter{Divide and Conquer}
     In divide-and-conquer, we solve a problem recursively, applying three steps
     at each level of recursion.\\
@@ -178,34 +181,34 @@
           \item recursion-tree method
           \item the master method
         \end{itemize}
-      \section{Substitution}
-        In the substitution method, we guess a bound and then use mathematical
-        induction to prove our guess is correct.
+    \section{Substitution}
+      In the substitution method, we guess a bound and then use mathematical
+      induction to prove our guess is correct.
 
-      \section{Recursion-Tree}
-        Drawing out a recursion tree serves as a straightforward way to devise
-        a good guess. Each node represents the cost of a single subproblem. We
-        sum up the costs within each level of the tree to obtain a set of per-level
-        costs, then sum the per-level costs to determine total cost of the recurrence.
+    \section{Recursion-Tree}
+      Drawing out a recursion tree serves as a straightforward way to devise
+      a good guess. Each node represents the cost of a single subproblem. We
+      sum up the costs within each level of the tree to obtain a set of per-level
+      costs, then sum the per-level costs to determine total cost of the recurrence.
 
-        Consider the recurrence $T(n) = 3T(\lfloor \frac{n}{4} \rfloor) + \Theta(n^2)$.
-        We create a recursion tree for the recurrence $T(n) = 3T(n/4) + cn^2$.
+      Consider the recurrence $T(n) = 3T(\lfloor \frac{n}{4} \rfloor) + \Theta(n^2)$.
+      We create a recursion tree for the recurrence $T(n) = 3T(n/4) + cn^2$.
 
-      \section{Master's Theorem}
-        The master method solves recurrences of the form
-        \begin{flushleft}
-          $T(n) = aT(n/b) + f(n)$
-        \end{flushleft}
-        where $a \geq 1$ and $b > 1$ are constants and $f(n)$ is an asymptotically positive
-        function. $T(n)$ has the following asymptotic bounds:
-        \begin{enumerate}
-          \item If $f(n) = O(n^{\log_b a-\epsilon})$ for some constant $\epsilon > 0$,
-          then\medskip\\ $T(n) = \Theta(n^{\log_b a})$.
-          \item If $f(n) = \Theta(n^{\log_b a})$, then $T(n) = \Theta(n^{\log_b a}\lg n)$.
-          \item If $f(n) = \Omega(n^{\log_b a+\epsilon})$ for some constant $\epsilon > 0$, and if
-          $af(n\b) \leq cf(n)$ for some constant $c < 1$ and all sufficiently large $n$, then
-          $T(n) = \Theta(f(n))$.
-        \end{enumerate}
+    \section{Master's Theorem}
+      The master method solves recurrences of the form
+      \begin{flushleft}
+        $T(n) = aT(n/b) + f(n)$
+      \end{flushleft}
+      where $a \geq 1$ and $b > 1$ are constants and $f(n)$ is an asymptotically positive
+      function. $T(n)$ has the following asymptotic bounds:
+      \begin{enumerate}
+        \item If $f(n) = O(n^{\log_b a-\epsilon})$ for some constant $\epsilon > 0$,
+        then\medskip\\ $T(n) = \Theta(n^{\log_b a})$.
+        \item If $f(n) = \Theta(n^{\log_b a})$, then $T(n) = \Theta(n^{\log_b a}\lg n)$.
+        \item If $f(n) = \Omega(n^{\log_b a+\epsilon})$ for some constant $\epsilon > 0$, and if
+        $af(n\b) \leq cf(n)$ for some constant $c < 1$ and all sufficiently large $n$, then
+        $T(n) = \Theta(f(n))$.
+      \end{enumerate}
   \chapter{Quicksort}
     Quicksort, like merge sort applies the divide-and-conquer paradigm.
   \chapter{Trees}
@@ -222,13 +225,13 @@
   between people). Common graph problems include shortest paths, number of minimum cuts,
   strongly connected components \ldots.
 
-  \section{Breadth-First Search}
-  \indent Often labeled as a `cautionary search', the plan of \textbf{Breadth-First Search}
-  is to uniformally explore the nodes of a graph outwards. In BFS, we pick a starting node
-  $n_1$ and visit all of $n_1$'s neighbors before visiting their neighbors.\\
-  \indent The main perk of BFS over other search algorithms is it can compute shortest
-  paths\index{shortest path} in unweighed graphs\index{unweighed graph}.
-  \begin{Verbatim}
+    \section{Breadth-First Search}
+    \indent Often labeled as a `cautionary search', the plan of \textbf{Breadth-First Search}
+    is to uniformally explore the nodes of a graph outwards. In BFS, we pick a starting node
+    $n_1$ and visit all of $n_1$'s neighbors before visiting their neighbors.\\
+    \indent The main perk of BFS over other search algorithms is it can compute shortest
+    paths\index{shortest path} in unweighed graphs\index{unweighed graph}.
+    \begin{Verbatim}
 void search(Node root){
   queue.add(root);
   visited.add(root);
@@ -247,144 +250,144 @@ void search(Node root){
     }
   }
 }
-  \end{Verbatim}
-  \runtime{V + E}
+    \end{Verbatim}
+    \runtime{V + E}
 
-  \subsection{Bipartite Graph}
-  We define a graph as \textbf{bipartite}\index{bipartite} graphs if $V(G)$ can be partitioned into two
-  subsets $U$ and $W$ such that every edge of G joins a vertex of $U$ and a vertex of $W$. We can
-  determine if a graph is bipartite using BFS.
-  \begin{enumerate}
-    \item Run BFS from any node $u$.
-    \item If we encounter a previously visited node $v$, we should check if $u$ and $v$ are both
-    even or both odd. If either of these conditions hold, then the graph is not bipartite.
-  \end{enumerate}\pagebreak
+      \subsection{Bipartite Graph}
+      We define a graph as \textbf{bipartite}\index{bipartite} graphs if $V(G)$ can be partitioned into two
+      subsets $U$ and $W$ such that every edge of G joins a vertex of $U$ and a vertex of $W$. We can
+      determine if a graph is bipartite using BFS.
+      \begin{enumerate}
+        \item Run BFS from any node $u$.
+        \item If we encounter a previously visited node $v$, we should check if $u$ and $v$ are both
+        even or both odd. If either of these conditions hold, then the graph is not bipartite.
+      \end{enumerate}\pagebreak
 
-  \subsection{Diameter of Tree}\index{diameter}
-  \begin{enumerate}
-    \item Run BFS from any node to find the farthest leaf node. Label that node T.
-    \item Run another BFS to find farthest node from T.
-  \end{enumerate}
-  \begin{theorem}
-    The path you found in step 2 is the longest path in the tree.
-  \end{theorem}
-  \begin{proof}
-    Let us assume that the diameter of the graph is unique. That is, there exists exactly
-    one pair of vertices ${u,v}$ which is the highest path length among any pair of vertices.
-    First, we establish that $u$ and $v$ must be leaf nodes, otherwise, there exists a
-    longer highest path.\\
-    \indent{}Take any node $w$ and find the vertex which is furthest from it. We will show that the vertex
-    found will be either $u$ or $v$. Suppose that the vertex found is different, say $z$.
-    Consider two cases:\\
-    \indent{}Case 1: $w$ lies on the path from $u$ to $v$.
-    Without loss of generality, let the $w-u$ path have no edges overlapping with the $w-z$ path.
-    We have $d(w,z) \geq d(w,v)$ and $d(w,z) \geq d(w,u)$. If true, then $d(u,z) = d(u,w) + d(w,z)
-    \geq d(u,w) + d(w,v) = d(u,v)$. This contradicts the assumption that d(u,v) is the unique diameter of the
-    tree.\\
-    \indent{}Case 2: $w$ does not lie on the path from $u$ to $v$. Now, either the $w-z$ path
-    either overlaps with $u-v$ path or is disjoint. If there is overlap, let $y$ be the vertex
-    closest to w among the overlapped vertices. Without loss of generality, let the $y-u$ path
-    have no edges overlapping with $y-z$ path. Now $d(y,z) \geq d(y,v).$ Hence $d(u,z) = d(u,y) + d(y,z)
-    \geq d(u,y) + d(y,v) = d(u,v)$. This once again contradicts the assumption of ${u,v}$ being the
-    unique diameter of the tree.\\
-    \indent{}If the paths do not overlap, there are vertices $x$ and $y$ on the $u-v$ and $w-z$ paths
-    respectively wich are closest to each other. $d(y,z) \geq d(y,v)$. Hence $d(u,z) = d(u,y) + d(y,z)
-    \geq d(u,y) = d(y,v) > d(u,x) + d(x,v) = d(u,v)$. Hence the assumption that d(u,v) is the diameter
-    is contradicted.\\
-    \indent{}We see that in each case, there is a contradiction if $z$ is not one of $u$ or $v$. Hence it follows
-    that $z$, the furthest vertex from $w$, is either $u$ or $v$.
-  \end{proof}
+      \subsection{Diameter of Tree}\index{diameter}
+      \begin{enumerate}
+        \item Run BFS from any node to find the farthest leaf node. Label that node T.
+        \item Run another BFS to find farthest node from T.
+      \end{enumerate}
+      \begin{theorem}
+        The path you found in step 2 is the longest path in the tree.
+      \end{theorem}
+      \begin{proof}
+        Let us assume that the diameter of the graph is unique. That is, there exists exactly
+        one pair of vertices ${u,v}$ which is the highest path length among any pair of vertices.
+        First, we establish that $u$ and $v$ must be leaf nodes, otherwise, there exists a
+        longer highest path.\\
+        \indent{}Take any node $w$ and find the vertex which is furthest from it. We will show that the vertex
+        found will be either $u$ or $v$. Suppose that the vertex found is different, say $z$.
+        Consider two cases:\\
+        \indent{}Case 1: $w$ lies on the path from $u$ to $v$.
+        Without loss of generality, let the $w-u$ path have no edges overlapping with the $w-z$ path.
+        We have $d(w,z) \geq d(w,v)$ and $d(w,z) \geq d(w,u)$. If true, then $d(u,z) = d(u,w) + d(w,z)
+        \geq d(u,w) + d(w,v) = d(u,v)$. This contradicts the assumption that d(u,v) is the unique diameter of the
+        tree.\\
+        \indent{}Case 2: $w$ does not lie on the path from $u$ to $v$. Now, either the $w-z$ path
+        either overlaps with $u-v$ path or is disjoint. If there is overlap, let $y$ be the vertex
+        closest to w among the overlapped vertices. Without loss of generality, let the $y-u$ path
+        have no edges overlapping with $y-z$ path. Now $d(y,z) \geq d(y,v).$ Hence $d(u,z) = d(u,y) + d(y,z)
+        \geq d(u,y) + d(y,v) = d(u,v)$. This once again contradicts the assumption of ${u,v}$ being the
+        unique diameter of the tree.\\
+        \indent{}If the paths do not overlap, there are vertices $x$ and $y$ on the $u-v$ and $w-z$ paths
+        respectively wich are closest to each other. $d(y,z) \geq d(y,v)$. Hence $d(u,z) = d(u,y) + d(y,z)
+        \geq d(u,y) = d(y,v) > d(u,x) + d(x,v) = d(u,v)$. Hence the assumption that d(u,v) is the diameter
+        is contradicted.\\
+        \indent{}We see that in each case, there is a contradiction if $z$ is not one of $u$ or $v$. Hence it follows
+        that $z$, the furthest vertex from $w$, is either $u$ or $v$.
+      \end{proof}
 
-  \section{Depth-First Search}
-  If BFS is the cautious and tentative exploration strategy, then \textbf{Depth-First Search}
-  \index{DFS}(DFS) is its more aggressive cousin. DFS explores aggressively, delving deeper
-  into the graph and backtracks only when necessary.\\
-  \indent The implementation of DFS is similar to BFS, but instead of using a queue\index{queue}, we
-  use a stack\index{stack}. Another method is to use recursion\index{recursion}.\\
-  \begin{Verbatim}
-    void search(Node root){
-      if(root == null) return;
-      visit(root);
-      root.visited = true;
-      for each (Node n in root.adjacent) {
-        if (n.visited == false) {
-          search(n);
-        }
-      }
+    \section{Depth-First Search}
+    If BFS is the cautious and tentative exploration strategy, then \textbf{Depth-First Search}
+    \index{DFS}(DFS) is its more aggressive cousin. DFS explores aggressively, delving deeper
+    into the graph and backtracks only when necessary.\\
+    \indent The implementation of DFS is similar to BFS, but instead of using a queue\index{queue}, we
+    use a stack\index{stack}. Another method is to use recursion\index{recursion}.\\
+    \begin{Verbatim}
+void search(Node root){
+  if(root == null) return;
+  visit(root);
+  root.visited = true;
+  for each (Node n in root.adjacent) {
+    if (n.visited == false) {
+      search(n);
     }
-  \end{Verbatim}
-  \runtime{V + E}
-  Why use DFS over BFS? DFS has its own catalog of applications that can't be replicated
-  using BFS.
-  \begin{itemize}
-    \item Computing a topological ordering of directed acyclic graphs
-    \item Computing strongly connected components of directed graphs
-  \end{itemize}
+  }
+}
+    \end{Verbatim}
+    \runtime{V + E}
+    Why use DFS over BFS? DFS has its own catalog of applications that can't be replicated
+    using BFS.
+    \begin{itemize}
+      \item Computing a topological ordering of directed acyclic graphs
+      \item Computing strongly connected components of directed graphs
+    \end{itemize}
 
-  \subsection{Topological Sort}
-  Khoa is really interested in artificial intelligence, so much so that before he graduates,
-  he wants to take the course offered by the computer science department, CS 4242 (X).
-  However, before he can enroll in CS 4242, he must have completed its prerequisites.\\
-  \indent The prerequisites for CS 4242 are CS 3304 (W) and MATH 3332 (V). CS 3304 and MATH 3332
-  also have a prerequisite, MATH 1190 (S).
+      \subsection{Topological Sort}
+      Khoa is really interested in artificial intelligence, so much so that before he graduates,
+      he wants to take the course offered by the computer science department, CS 4242 (X).
+      However, before he can enroll in CS 4242, he must have completed its prerequisites.\\
+      \indent The prerequisites for CS 4242 are CS 3304 (W) and MATH 3332 (V). CS 3304 and MATH 3332
+      also have a prerequisite, MATH 1190 (S).
 
-  The sequence of which Khoa can take his classes can be arranged via topological sort.
-  There are two sequences which Khoa can take.
+      The sequence of which Khoa can take his classes can be arranged via topological sort.
+      There are two sequences which Khoa can take.
 
-  A \textbf{topological ordering}\index{topological ordering} of a directed graph G
-  is a labeling $f$ of G's nodes such that:
-  \begin{enumerate}
-    \item the $f(v)$'s are the set ${1,2,\ldots, n}$
-    \item $(u,v) \in G \Rightarrow f(u) < f(v)$
-  \end{enumerate}
+      A \textbf{topological ordering}\index{topological ordering} of a directed graph G
+      is a labeling $f$ of G's nodes such that:
+      \begin{enumerate}
+        \item the $f(v)$'s are the set ${1,2,\ldots, n}$
+        \item $(u,v) \in G \Rightarrow f(u) < f(v)$
+      \end{enumerate}
 
-  As long as our structure is a directed acyclic graph (DAG), we can compute a topological ordering.
-  Every DAG has a sink vertex. Remove the sink vertex, and the remaining graph is a DAG. (Unless
-  $|v| < 1$) The pseudocode for a topological sort is as follows:
-  \begin{Verbatim}
-    DFS(graph G, start vertex s) {
-      visit(s);
-      for each edge (s,v) {
-        if(v.visited == false)
-          DFS(G, v);
-      }
-      set f(s) = current_label
-      current_label--;
-    }
+      As long as our structure is a directed acyclic graph (DAG), we can compute a topological ordering.
+      Every DAG has a sink vertex. Remove the sink vertex, and the remaining graph is a DAG. (Unless
+      $|v| < 1$) The pseudocode for a topological sort is as follows:
+      \begin{Verbatim}
+DFS(graph G, start vertex s) {
+  visit(s);
+  for each edge (s,v) {
+    if(v.visited == false)
+      DFS(G, v);
+  }
+  set f(s) = current_label
+  current_label--;
+}
 
-    topologic_sort(graph G) {
-      mark all nodes unexplored;
-      current_label = n;
-      for each vertex $v \in G$ {
-        if(v.visited == false)
-          DFS(G, v);
-      }
-    }
-  \end{Verbatim}
-  \runtime{V + E}
-  \memory{V + E}
-  \begin{proof}
-    Take any edge, $(u,v)$. We will show that $f(u) < f(v)$.\\\\
-    \indent Case 1: u is visited by DFS before v\\
-    u will recursively call v, which will continue DFS. Eventually v will exhaust
-    its adjacent neighbors and become a sink vertex before u. $f(u) < f(v)$\\\\
-    \indent Case 2: v is visited by DFS before u\\
-    v makes recursive DFS calls. u will never be visited during these recursively calls,
-    otherwise the graph would contain a directed cycle. As a result, v will become a sink
-    vertex before u is visited. $f(u) < f(v)$
-  \end{proof}
+topologic_sort(graph G) {
+  mark all nodes unexplored;
+  current_label = n;
+  for each vertex $v \in G$ {
+    if(v.visited == false)
+      DFS(G, v);
+  }
+}
+      \end{Verbatim}
+      \runtime{V + E}
+      \memory{V + E}
+      \begin{proof}
+        Take any edge, $(u,v)$. We will show that $f(u) < f(v)$.\\\\
+        \indent Case 1: u is visited by DFS before v\\
+        u will recursively call v, which will continue DFS. Eventually v will exhaust
+        its adjacent neighbors and become a sink vertex before u. $f(u) < f(v)$\\\\
+        \indent Case 2: v is visited by DFS before u\\
+        v makes recursive DFS calls. u will never be visited during these recursively calls,
+        otherwise the graph would contain a directed cycle. As a result, v will become a sink
+        vertex before u is visited. $f(u) < f(v)$
+      \end{proof}
 
-  \subsection{Strongly Connected Components}
-  The \textbf{strongly connected components}\index{SCC} of a directed graph G are defined
-  as the equivalence classes of the relation $u\sim v \Leftrightarrow \exists$ path$(u,v)$ and
-  path$(v,u)$. SCCs can be computed using \textbf{Kosaraju's Two Pass algorithm}
-  \index{Kosaraju}.
+      \subsection{Strongly Connected Components}
+      The \textbf{strongly connected components}\index{SCC} of a directed graph G are defined
+      as the equivalence classes of the relation $u\sim v \Leftrightarrow \exists$ path$(u,v)$ and
+      path$(v,u)$. SCCs can be computed using \textbf{Kosaraju's Two Pass algorithm}
+      \index{Kosaraju}.
 
-  Kosaraju's Two Pass Algorithm
-  \newtheorem{Kosaraju}{Theorem}[section]
-  \begin{Kosaraju}
-    Can compute SCC in $O(m+n)$
-  \end{Kosaraju}
+      Kosaraju's Two Pass Algorithm
+      \newtheorem{Kosaraju}{Theorem}[section]
+      \begin{Kosaraju}
+        Can compute SCC in $O(m+n)$
+      \end{Kosaraju}
   \chapter{Weighted Graphs}
   \chapter{Hash Tables}
     Comparing arrays and linked lists, we learned that arrays are able to search for an element
@@ -398,6 +401,110 @@ void search(Node root){
       Direct addressing works well when the universe $U$ of keys is reasonably small.
       Suppose we have a dynamic set where each element has a key drawn from the universe $U = \left\{ 0,1, \ldots, m - 1 \right\}$
       Assume no two elements have the same key.
+
+  \chapter{Bitwise Operators}
+    In low-level programming, it is often necessary to access memory locations and change individual bits.
+    \textbf{Bitwise operators} provide a straightforward method to tinker with bits and bytes. There are
+    scenarios when bitwise operators provide a simpler and quicker method over loops and recursion.
+    \section{Bread and Butter Operators}
+    % http://graphics.stanford.edu/~seander/bithacks.html#SwappingValuesSubAdd
+    \subsection*{Bitwise Shifting}
+    The leftshift operator is the equivalent of moving all the bits of a number a specified number of places to the left:
+    \begin{verbatim}
+      [variable] << [number_of_places]
+    \end{verbatim}
+    For instance, consider the number 8 written in binary 00001000. If we wanted to shift it to the left 2 places, we'd end up with
+    00100000; everything is moved to the left two places, and zeros are added as padding. This is the number 32.
+
+    Essentially left shifting is the equivalent of multiplying by a power by two. Just as there is a left shift operator, there also exists
+    the right shift operator (\textgreater\textgreater).
+
+    \subsection*{Bitwise AND}
+    The bitwise AND operator is a single ampersand. A binary AND takes the logical AND of the bits
+    in each position of a number in binary form. \textbf{Example}: 72 \& 184 = 8
+    \begin{verbatim}
+      01001000 &
+      10111000 =
+      --------
+      00001000
+    \end{verbatim}
+
+    \subsection*{Bitwise OR}
+    The bitwise OR operator symbol is a single pipe: $\vert$. Only one of the two bits must be true to return true
+    for that position's bit. \textbf{Example}: 72 $\vert$ 184 = 248
+    \begin{verbatim}
+      01001000 |
+      10111000 =
+      --------
+      11111000
+    \end{verbatim}
+
+    \subsection*{Bitwise Complement}
+    The bitwise complement operator, the tilde $\sim$, flips every bit.
+    This turns out to be a great way of finding the largest possible value for an unsigned number:
+    \begin{verbatim}
+      unsigned int max = ~0;
+    \end{verbatim}
+
+    \subsection*{Bitwise XOR}
+    The exclusive-or operator takes two inputs and returns a 1 if either one or the other of the
+    inputs is a 1, but not if both are. The symbol for XOR is $\wedge$.
+    \begin{verbatim}
+      01110010 ^
+      10101010 =
+      --------
+      11011000
+    \end{verbatim}
+
+    Using bitwise operators are good for saving space and time when used properly. Here are a couple
+    examples:\\\\
+    \textbf{Checking if a number is a power of 2}:
+    \begin{verbatim}
+    n & (n-1) == 0
+    \end{verbatim}
+    \textbf{Checking if a number is of form $2^n-1$}:
+    \begin{verbatim}
+    n & (n+1) == 0
+    \end{verbatim}
+    \textbf{Checking if the rightmost bit is set}:
+    \begin{verbatim}
+      n & 1 == 1
+    \end{verbatim}
+    \textbf{Round up to next highest power of 2}
+    \begin{Verbatim}
+unsigned int v;
+
+v--;
+v |= v >> 1;
+v |= v >> 2;
+v |= v >> 4;
+v |= v >> 8;
+v |= v >> 16;
+v++;
+    \end{Verbatim}
+    \textbf{Reverse bits}
+    \begin{Verbatim}
+unsigned int v;     // input bits to be reversed
+unsigned int r = v; // r will be reversed bits of v
+int s = sizeof(v) * CHAR_BIT - 1; // extra shift needed at end
+
+for (v >>= 1; v; v >>= 1)
+{
+  r <<= 1;
+  r |= v & 1;
+  s--;
+}
+r <<= s; // shift when v's highest bits are zero
+    \end{Verbatim}
+    \section{Bit Masking}
+    The process of masking is similar to preparing to spray paint an object. You want to cover any exposed areas
+    so that the spray paint is applied to the object barring the covered area. Bit masking is the act of applying
+    a mask to a value via bit operations. \\\\
+    \textbf{Determining if a number is a power of four}:
+    \begin{verbatim}
+(num & 1 == 0) and (num & num-1) == 0 and (num & 0xAAAAAAAA == 0);
+    \end{verbatim}
+    The hexadecimal value of 0xAAAAAAAA acts as a mask for 1010 1010 1010 1010 1010 1010 1010 1010 in binary.
 
   \backmatter
   \setlength{\cftbeforechapskip}{15pt}
