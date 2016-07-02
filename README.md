@@ -1,13 +1,25 @@
-AlgorithmBook is designed to be used for ICPC and programming contests.
-Its main purpose is to document topics reviewed in preparation for ICPC.
+## About
 
-Version 0.0.1 Changelog
-- Basic formatting, title, table of contents, and index
+AlgorithmBook is designed as a cookbook for various algorithms in preparation for ICPC.
 
-Version 0.0.2 Changelog
-- Chapter 1: Graph introduction, DFS (WIP)
-- Preface (WIP)
+## Installation
+AlgorithmBook is written under LaTeX. The download provides a book.tex file which you will then need to compile to .pdf with MiKTeX or TeXLive (Windows).
 
-Version 0.1.0 Changelog
-- LaTeX formatting: ToC, Theorem, Proof, Pseudocode(Verbatim), Macros
-- Added references, appendix I & II
+## Contents
+1. Asymptotic Notation
+2. Divide and Conquer
+3. Quicksort
+4. Trees
+5. Graphs
+6. Weighed Graphs
+7. Numbers
+8. Hash Tables
+9. Bitwise Operators
+
+## Upcoming Changes
+
+- [x] Custom Code environment to improve readability
+  - [x] Add custom names:  \\code\{Title\}
+  - [x] Fix environment to prevent page breaks and margin breaks
+
+- [x] Graph generator

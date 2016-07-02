@@ -253,7 +253,7 @@ void search(Node root){
     \end{Verbatim}
     \runtime{V + E}
 
-      \subsection{Bipartite Graph}
+      \subsection*{Bipartite Graph}
       We define a graph as \textbf{bipartite}\index{bipartite} graphs if $V(G)$ can be partitioned into two
       subsets $U$ and $W$ such that every edge of G joins a vertex of $U$ and a vertex of $W$. We can
       determine if a graph is bipartite using BFS.
@@ -261,40 +261,41 @@ void search(Node root){
         \item Run BFS from any node $u$.
         \item If we encounter a previously visited node $v$, we should check if $u$ and $v$ are both
         even or both odd. If either of these conditions hold, then the graph is not bipartite.
-      \end{enumerate}\pagebreak
+      \end{enumerate}
 
-      \subsection{Diameter of Tree}\index{diameter}
+      \subsection*{Diameter of Tree}\index{diameter}
       \begin{enumerate}
         \item Run BFS from any node to find the farthest leaf node. Label that node T.
         \item Run another BFS to find farthest node from T.
       \end{enumerate}
-      \begin{theorem}
-        The path you found in step 2 is the longest path in the tree.
-      \end{theorem}
       \begin{proof}
         Let us assume that the diameter of the graph is unique. That is, there exists exactly
         one pair of vertices ${u,v}$ which is the highest path length among any pair of vertices.
         First, we establish that $u$ and $v$ must be leaf nodes, otherwise, there exists a
-        longer highest path.\\
-        \indent{}Take any node $w$ and find the vertex which is furthest from it. We will show that the vertex
+        longer highest path.
+
+        Take any node $w$ and find the vertex which is furthest from it. We will show that the vertex
         found will be either $u$ or $v$. Suppose that the vertex found is different, say $z$.
         Consider two cases:\\
-        \indent{}Case 1: $w$ lies on the path from $u$ to $v$.
+
+        \underline{Case 1:} $w$ lies on the path from $u$ to $v$.\\
         Without loss of generality, let the $w-u$ path have no edges overlapping with the $w-z$ path.
-        We have $d(w,z) \geq d(w,v)$ and $d(w,z) \geq d(w,u)$. If true, then $d(u,z) = d(u,w) + d(w,z)
-        \geq d(u,w) + d(w,v) = d(u,v)$. This contradicts the assumption that d(u,v) is the unique diameter of the
-        tree.\\
-        \indent{}Case 2: $w$ does not lie on the path from $u$ to $v$. Now, either the $w-z$ path
-        either overlaps with $u-v$ path or is disjoint. If there is overlap, let $y$ be the vertex
-        closest to w among the overlapped vertices. Without loss of generality, let the $y-u$ path
-        have no edges overlapping with $y-z$ path. Now $d(y,z) \geq d(y,v).$ Hence $d(u,z) = d(u,y) + d(y,z)
-        \geq d(u,y) + d(y,v) = d(u,v)$. This once again contradicts the assumption of ${u,v}$ being the
-        unique diameter of the tree.\\
-        \indent{}If the paths do not overlap, there are vertices $x$ and $y$ on the $u-v$ and $w-z$ paths
+        The distance from $w$ to $z$ is greater than $w$ to $u$ and $w$ to $v$. If true, then
+        $d(u,z) = d(u,w) + d(w,z) \geq d(u,w) + d(w,v) = d(u,v)$. This contradicts the assumption that
+        $d(u,v)$ is the unique diameter of the tree.\\
+
+        \underline{Case 2:} $w$ does not lie on the path from $u$ to $v$.\\
+        Now, either the $w-z$ path either overlaps with $u-v$ path or is disjoint. If there is overlap,
+        let $y$ be the vertex closest to w among the overlapped vertices. The distance from $y$ to $z$
+        must be greater than $y$ to $v$. Hence $d(u,z) = d(u,y) + d(y,z) \geq d(u,y) + d(y,v) = d(u,v)$.
+        This once again contradicts the assumption of ${u,v}$ being the unique diameter of the tree.\\
+
+        If the paths do not overlap, there are vertices $x$ and $y$ on the $u-v$ and $w-z$ paths
         respectively wich are closest to each other. $d(y,z) \geq d(y,v)$. Hence $d(u,z) = d(u,y) + d(y,z)
         \geq d(u,y) = d(y,v) > d(u,x) + d(x,v) = d(u,v)$. Hence the assumption that d(u,v) is the diameter
         is contradicted.\\
-        \indent{}We see that in each case, there is a contradiction if $z$ is not one of $u$ or $v$. Hence it follows
+
+        We see that in each case, there is a contradiction if $z$ is not one of $u$ or $v$. Hence it follows
         that $z$, the furthest vertex from $w$, is either $u$ or $v$.
       \end{proof}
 
@@ -324,16 +325,7 @@ void search(Node root){
       \item Computing strongly connected components of directed graphs
     \end{itemize}
 
-      \subsection{Topological Sort}
-      Khoa is really interested in artificial intelligence, so much so that before he graduates,
-      he wants to take the course offered by the computer science department, CS 4242 (X).
-      However, before he can enroll in CS 4242, he must have completed its prerequisites.\\
-      \indent The prerequisites for CS 4242 are CS 3304 (W) and MATH 3332 (V). CS 3304 and MATH 3332
-      also have a prerequisite, MATH 1190 (S).
-
-      The sequence of which Khoa can take his classes can be arranged via topological sort.
-      There are two sequences which Khoa can take.
-
+      \subsection*{Topological Sort}
       A \textbf{topological ordering}\index{topological ordering} of a directed graph G
       is a labeling $f$ of G's nodes such that:
       \begin{enumerate}
@@ -358,7 +350,7 @@ DFS(graph G, start vertex s) {
 topologic_sort(graph G) {
   mark all nodes unexplored;
   current_label = n;
-  for each vertex $v \in G$ {
+  for each vertex v of G {
     if(v.visited == false)
       DFS(G, v);
   }
@@ -367,28 +359,161 @@ topologic_sort(graph G) {
       \runtime{V + E}
       \memory{V + E}
       \begin{proof}
-        Take any edge, $(u,v)$. We will show that $f(u) < f(v)$.\\\\
-        \indent Case 1: u is visited by DFS before v\\
+        Take any edge, $(u,v)$. We will show that $f(u) < f(v)$.\\
+
+        \underline{Case 1:} u is visited by DFS before v\\
         u will recursively call v, which will continue DFS. Eventually v will exhaust
-        its adjacent neighbors and become a sink vertex before u. $f(u) < f(v)$\\\\
-        \indent Case 2: v is visited by DFS before u\\
+        its adjacent neighbors and become a sink vertex before u. $f(u) < f(v)$\\
+
+        \underline{Case 2:} v is visited by DFS before u\\
         v makes recursive DFS calls. u will never be visited during these recursively calls,
         otherwise the graph would contain a directed cycle. As a result, v will become a sink
         vertex before u is visited. $f(u) < f(v)$
       \end{proof}
 
-      \subsection{Strongly Connected Components}
+      \subsection*{Strongly Connected Components}
       The \textbf{strongly connected components}\index{SCC} of a directed graph G are defined
       as the equivalence classes of the relation $u\sim v \Leftrightarrow \exists$ path$(u,v)$ and
       path$(v,u)$. SCCs can be computed using \textbf{Kosaraju's Two Pass algorithm}
       \index{Kosaraju}.
 
-      Kosaraju's Two Pass Algorithm
-      \newtheorem{Kosaraju}{Theorem}[section]
-      \begin{Kosaraju}
-        Can compute SCC in $O(m+n)$
-      \end{Kosaraju}
+      The idea behind Kosaraju's algorithm is to perform two-DFS. The first DFS provides a topological
+      sort. We then reverse the direction of each edge in $G$, yielding $G'$. $G$ and $G'$ contain
+      the same amount of strongly connected components, so we perform DFS once again, this time
+      with a specific ordering obtained by our topological sort.
+
+      Kosaraju's Two Pass Algorithm:
+      \begin{verbatim}
+// Credit to geeksforgeeks.org
+// C++ Implementation of Kosaraju's algorithm to print all SCCs
+#include <iostream>
+#include <list>
+#include <stack>
+using namespace std;
+
+class Graph
+{
+	int V; // No. of vertices
+	list<int> *adj; // An array of adjacency lists
+
+	// Fills Stack with vertices (in increasing order of finishing
+	// times). The top element of stack has the maximum finishing
+	// time
+	void fillOrder(int v, bool visited[], stack<int> &Stack);
+
+	// A recursive function to print DFS starting from v
+	void DFSUtil(int v, bool visited[]);
+public:
+	Graph(int V);
+	void addEdge(int v, int w);
+
+	// The main function that finds and prints strongly connected
+	// components
+	void printSCCs();
+
+	// Function that returns reverse (or transpose) of this graph
+	Graph getTranspose();
+};
+
+Graph::Graph(int V)
+{
+	this->V = V;
+	adj = new list<int>[V];
+}
+
+// A recursive function to print DFS starting from v
+void Graph::DFSUtil(int v, bool visited[])
+{
+	// Mark the current node as visited and print it
+	visited[v] = true;
+	cout << v << " ";
+
+	// Recur for all the vertices adjacent to this vertex
+	list<int>::iterator i;
+	for (i = adj[v].begin(); i != adj[v].end(); ++i)
+		if (!visited[*i])
+			DFSUtil(*i, visited);
+}
+
+Graph Graph::getTranspose()
+{
+	Graph g(V);
+	for (int v = 0; v < V; v++)
+	{
+		// Recur for all the vertices adjacent to this vertex
+		list<int>::iterator i;
+		for(i = adj[v].begin(); i != adj[v].end(); ++i)
+		{
+			g.adj[*i].push_back(v);
+		}
+	}
+	return g;
+}
+
+void Graph::addEdge(int v, int w)
+{
+	adj[v].push_back(w); // Add w to v’s list.
+}
+
+void Graph::fillOrder(int v, bool visited[], stack<int> &Stack)
+{
+	// Mark the current node as visited and print it
+	visited[v] = true;
+
+	// Recur for all the vertices adjacent to this vertex
+	list<int>::iterator i;
+	for(i = adj[v].begin(); i != adj[v].end(); ++i)
+		if(!visited[*i])
+			fillOrder(*i, visited, Stack);
+
+	// All vertices reachable from v are processed by now, push v
+	Stack.push(v);
+}
+
+// The main function that finds and prints all strongly connected
+// components
+void Graph::printSCCs()
+{
+	stack<int> Stack;
+
+	// Mark all the vertices as not visited (For first DFS)
+	bool *visited = new bool[V];
+	for(int i = 0; i < V; i++)
+		visited[i] = false;
+
+	// Fill vertices in stack according to their finishing times
+	for(int i = 0; i < V; i++)
+		if(visited[i] == false)
+			fillOrder(i, visited, Stack);
+
+	// Create a reversed graph
+	Graph gr = getTranspose();
+
+	// Mark all the vertices as not visited (For second DFS)
+	for(int i = 0; i < V; i++)
+		visited[i] = false;
+
+	// Now process all vertices in order defined by Stack
+	while (Stack.empty() == false)
+	{
+		// Pop a vertex from stack
+		int v = Stack.top();
+		Stack.pop();
+
+		// Print Strongly connected component of the popped vertex
+		if (visited[v] == false)
+		{
+			gr.DFSUtil(v, visited);
+			cout << endl;
+		}
+	}
+}
+      \end{verbatim}
   \chapter{Weighted Graphs}
+  \chapter{Numbers}
+    \section{Primes}
+      \subsection*{Generating Prime Table}
+
   \chapter{Hash Tables}
     Comparing arrays and linked lists, we learned that arrays are able to search for an element
     in $O(1)$. Linked lists on the other hand takes $\Theta(n)$ time in the worst case.
@@ -418,6 +543,7 @@ topologic_sort(graph G) {
 
     Essentially left shifting is the equivalent of multiplying by a power by two. Just as there is a left shift operator, there also exists
     the right shift operator (\textgreater\textgreater).
+    \pagebreak
 
     \subsection*{Bitwise AND}
     The bitwise AND operator is a single ampersand. A binary AND takes the logical AND of the bits
@@ -455,6 +581,7 @@ topologic_sort(graph G) {
       --------
       11011000
     \end{verbatim}
+    \pagebreak
 
     Using bitwise operators are good for saving space and time when used properly. Here are a couple
     examples:\\\\
